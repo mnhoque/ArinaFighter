@@ -21,8 +21,15 @@ namespace ArinaFighter
         int newStrength_player1 = 0;
         int newStrength_player2 = 0;
         int count = 0;
+
+        int playWinCount = 0;
+        int opponentWinCount = 0;
         public void StartBattle(Charecter player, Charecter opponent)
         {
+            double playerTotalhalsa = player.halsa;
+            double opponentTotalhalsa = opponent.halsa;
+
+            Console.WriteLine($"{player.Name} halsa is {player.halsa} and {opponent.Name} halsa is {opponent.halsa}");
             while ((player.CheckLife() == true) && (opponent.CheckLife() == true))
             {
                 if ((player.CheckLife() == false) || (opponent.CheckLife() == false))
@@ -45,6 +52,7 @@ namespace ArinaFighter
                 if (player.strength > opponent.strength)
                 {
                     Console.WriteLine($"The winner is {player.Name}");
+                    playWinCount++;
                     round.roundNo = count;
                     round.winnerName = player.Name;
 
@@ -66,6 +74,7 @@ namespace ArinaFighter
                 else
                 {
                     Console.WriteLine($"The winner is {opponent.Name}");
+                    opponentWinCount++;
                     round.roundNo = count;
                     round.winnerName = opponent.Name;
                     //battle.addInList(round);
@@ -78,11 +87,38 @@ namespace ArinaFighter
                     opponent.strength = 0;
                     player.strength = 0;
                 }
+                if ((player.halsa >3 && player.halsa <= playerTotalhalsa / 2) || (opponent.halsa >3 && opponent.halsa <= opponentTotalhalsa / 2))
+                {
+                    Console.WriteLine("Do you want a break or continue");
+                    string option = Console.ReadLine();
+                    if (option.ToLower() == "break")
+                    {
+                        Console.WriteLine($"The game is paused because {player.Name} wants pause for 5 minutes");
+                        Console.WriteLine($"Hello {player.Name} are you ready to start again");
+                        option = Console.ReadLine();
+                        if (option.ToLower() == "yes")
+                        {
+                            Console.WriteLine("----------------------------");
+                            continue;
+                        }
 
+                    }
+                    else
+                    {
+                        Console.WriteLine("----------------------------");
+                        continue;
+                    }
+                }
                 Console.WriteLine("----------------------------");
-
             }
-
+            if (playWinCount > opponentWinCount)
+            {
+                Console.WriteLine($"{player.Name} is win in the battle");
+            }
+            else
+            {
+                Console.WriteLine($"{opponent.Name} is win in the battle");
+            }
 
 
 

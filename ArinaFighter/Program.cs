@@ -12,12 +12,24 @@ namespace ArinaFighter
     {
         static void Main(string[] args)
         {
-            Battle battle = new Battle();
+            Console.WriteLine("How many battles do you want guys");
+            int number = 0;
+            int.TryParse(Console.ReadLine(), out number);
+            int battlecout = 0;
+            while (battlecout < number + 1)
+            {
+                Battle battle = new Battle();
 
-            Charecter player = new Charecter("Rajjo");
-            Charecter opponent = new Charecter("aniya");
+                Charecter player = new Charecter("Rajjo");
+                Charecter opponent = new Charecter("aniya");
 
-            battle.StartBattle(player, opponent);
+                battle.StartBattle(player, opponent);
+                battlecout++;
+            }
+            
+            
+
+            Console.WriteLine("");
 
             //Charecter player1 = new Charecter("Rabbi");
             //int newStrength_player1 = player1.strength;
